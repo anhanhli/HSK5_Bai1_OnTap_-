@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSK 5 · Bài 1 · 爱的细节 · Ôn tập đầy đủ</title>
+<style>
+:root{--primary:#c45c26;--primary-dark:#9a3f12;--accent:#2c5f7c;--bg:#faf7f2;--card:#fff;--text:#2d2a26;--muted:#6b6560;--success:#2d8a4e;--error:#c0392b;--border:#e8e0d5;--radius:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:1.4rem 1rem;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+header h1{font-size:1.5rem;font-weight:700;margin-bottom:.25rem}
+header p{opacity:.9;font-size:.9rem}
+.container{max-width:920px;margin:0 auto;padding:1rem}
+.tabs{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem;background:var(--card);padding:.45rem;border-radius:var(--radius);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.tab-btn{flex:1 1 auto;min-width:90px;padding:.55rem .6rem;border:none;background:transparent;color:var(--muted);font-size:.82rem;font-weight:600;cursor:pointer;border-radius:8px;transition:all .2s}
+.tab-btn:hover{background:#f0e9e0;color:var(--primary)}
+.tab-btn.active{background:var(--primary);color:#fff;box-shadow:0 2px 6px rgba(196,92,38,.35)}
+.tab-content{display:none}
+.tab-content.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:var(--radius);padding:1.2rem;margin-bottom:.9rem;box-shadow:0 2px 10px rgba(0,0,0,.05);border:1px solid var(--border)}
+.card h2{font-size:1.1rem;color:var(--primary);margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
+.card h3{font-size:.98rem;color:var(--accent);margin:.9rem 0 .45rem}
+.level-tag{display:inline-block;font-size:.7rem;padding:.12rem .45rem;border-radius:4px;font-weight:600;margin-left:.3rem}
+.lv-easy{background:#e6f7ed;color:#2d8a4e}.lv-mid{background:#fff3e0;color:#e65100}.lv-hard{background:#fdecea;color:#c0392b}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem}
+.vocab-item{background:#f9f4ee;border-radius:10px;padding:.75rem;border-left:4px solid var(--primary);cursor:pointer;transition:transform .15s}
+.vocab-item:hover{transform:translateY(-2px)}
+.vocab-hanzi{font-size:1.35rem;font-weight:700}
+.vocab-pinyin{color:var(--accent);font-size:.88rem;margin:.1rem 0}
+.vocab-mean{color:var(--muted);font-size:.85rem}
+.vocab-pos{font-size:.72rem;color:#999;margin-top:.15rem}
+.vocab-example{margin-top:.45rem;font-size:.82rem;color:#555;display:none;border-top:1px dashed var(--border);padding-top:.4rem}
+.vocab-item.open .vocab-example{display:block}
+.vocab-item.open{background:#fff8f0}
+.quiz-q{margin-bottom:1rem;padding:.9rem;background:#faf8f5;border-radius:10px;border:1px solid var(--border)}
+.quiz-q p{margin-bottom:.5rem;font-weight:500;font-size:.95rem}
+.q-num{color:var(--primary);font-weight:700}
+.quiz-opts label{display:block;padding:.48rem .7rem;margin:.25rem 0;background:#fff;border-radius:8px;cursor:pointer;font-size:.92rem;border:1px solid transparent}
+.quiz-opts label:hover{background:#ebe3d8}
+.quiz-opts input{margin-right:.45rem}
+.btn{display:inline-block;padding:.6rem 1.3rem;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:.92rem;font-weight:600;cursor:pointer;margin-top:.4rem;margin-right:.35rem}
+.btn:hover{background:var(--primary-dark)}
+.btn-secondary{background:var(--accent)}.btn-secondary:hover{background:#1e4a60}
+.feedback{margin-top:.45rem;padding:.5rem .75rem;border-radius:8px;font-size:.85rem;display:none}
+.feedback.correct{background:#e6f7ed;color:var(--success);display:block}
+.feedback.wrong{background:#fdecea;color:var(--error);display:block}
+.grammar-box{background:#f0f7fb;border-left:4px solid var(--accent);padding:.9rem;border-radius:0 10px 10px 0;margin:.7rem 0;font-size:.93rem}
+.grammar-box strong{color:var(--accent)}
+.reading-text{background:#f9f4ee;padding:1rem;border-radius:10px;line-height:1.8;font-size:1rem}
+.reading-text .cn{display:block;margin-bottom:.2rem}
+.reading-text .vi{color:var(--muted);font-size:.85rem;margin-bottom:.65rem}
+.order-box{display:flex;flex-wrap:wrap;gap:.4rem;min-height:44px;padding:.6rem;background:#f5f0ea;border-radius:10px;margin:.4rem 0;border:2px dashed var(--border)}
+.order-word{background:#fff;border:1px solid var(--primary);color:var(--primary);padding:.3rem .55rem;border-radius:6px;cursor:pointer;font-weight:500;font-size:.9rem}
+.order-word:hover{background:#fff8f0}
+.order-word.used{opacity:.3;pointer-events:none}
+.write-area{width:100%;min-height:80px;padding:.7rem;border:1.5px solid var(--border);border-radius:10px;font-size:.98rem;font-family:inherit;resize:vertical}
+.write-area:focus{outline:none;border-color:var(--primary)}
+.hint{font-size:.82rem;color:var(--muted);margin:.2rem 0 .35rem}
+.score-box{margin-top:.9rem;padding:.7rem 1rem;background:#f0f7fb;border-radius:10px;font-weight:700;font-size:1rem;color:var(--accent);display:none}
+.filter-bar{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem}
+.filter-btn{padding:.35rem .7rem;border:1px solid var(--border);background:#fff;border-radius:20px;font-size:.8rem;cursor:pointer;color:var(--muted)}
+.filter-btn.active,.filter-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+.section-note{background:#fff8e7;border-left:4px solid #f0a500;padding:.7rem .9rem;border-radius:0 8px 8px 0;margin-bottom:1rem;font-size:.88rem;color:#5a4a00}
+footer{text-align:center;padding:1.3rem;color:var(--muted);font-size:.82rem}
+@media(max-width:600px){.tab-btn{font-size:.75rem;padding:.45rem .3rem;min-width:70px}header h1{font-size:1.2rem}.vocab-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
+
+.skill-box{background:#eef7f0;border-left:4px solid #2d8a4e;padding:.85rem 1rem;border-radius:0 10px 10px 0;margin:0 0 1rem;font-size:.9rem}
+.skill-box h4{color:#2d8a4e;margin-bottom:.4rem;font-size:.95rem}
+.skill-box ul{margin:.3rem 0 0 1.1rem;padding:0}
+.skill-box li{margin:.2rem 0}
+.radical-box{background:#f5f0ff;border-left:4px solid #7c5cbf;padding:.7rem .9rem;border-radius:0 8px 8px 0;margin:.5rem 0;font-size:.88rem}
+.radical-box strong{color:#5a3d9a}
+.write-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.6rem;margin:.8rem 0}
+.write-card{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:.7rem;text-align:center}
+.write-card .hanzi{font-size:1.8rem;font-weight:700;letter-spacing:.05em;margin:.3rem 0}
+.write-card .pinyin{color:var(--accent);font-size:.85rem}
+.write-card .radical{font-size:.78rem;color:#7c5cbf;margin-top:.25rem}
+.write-line{border-bottom:1.5px dashed #ccc;height:36px;margin:.25rem 0}
+
+.write-card.open .vocab-example{display:block !important}
+.write-card .vocab-example{text-align:left;color:#555}
+
+.speak-box{background:#f0f7fb;border-radius:10px;padding:1rem;margin:.7rem 0;border:1px solid #d0e4f0}
+.speak-box .model{background:#fff;padding:.6rem .8rem;border-radius:8px;margin:.4rem 0;border-left:3px solid var(--accent);font-size:.95rem}
+.speak-box .prompt{font-weight:600;color:var(--accent);margin-bottom:.3rem}
+
+</style>
+</head>
+<body>
+<header>
+<h1>HSK 5 · Bài 1 · 爱的细节</h1>
+<p>38 thẻ từ · Ngữ pháp · Viết chữ + Nói · Viết đoạn · Quan điểm</p>
+</header>
+<div class="container">
+<div class="tabs">
+<button class="tab-btn active" data-tab="vocab">📚 Từ vựng</button>
+<button class="tab-btn" data-tab="grammar">📖 Ngữ pháp</button>
+<button class="tab-btn" data-tab="reading">📄 Bài đọc</button>
+<button class="tab-btn" data-tab="order">🔀 Sắp xếp</button>
+<button class="tab-btn" data-tab="write">✍️ Viết đoạn</button>
+<button class="tab-btn" data-tab="opinion">💬 Quan điểm</button>
+<button class="tab-btn" data-tab="practice">✏️ Viết + Nói</button>
+</div>
+
+<!-- TAB VOCAB -->
+<div class="tab-content active" id="vocab">
+<div class="card">
+<h2>📚 38 Thẻ từ vựng bài 1 (HSK标准教程5)</h2>
+<div class="skill-box">
+<h4>🎯 Kỹ năng từ vựng cần rèn</h4>
+<ul>
+<li>Nhận biết <strong>bộ thủ (部首)</strong> để suy nghĩa và nhớ chữ lâu hơn</li>
+<li>Kết hợp <strong>đọc – viết – nói</strong> cùng một từ trong ngữ cảnh</li>
+<li>Học theo chuỗi：词 → 短语 → 句子</li>
+</ul>
+</div>
+<p class="hint">Nhấn thẻ để xem ví dụ. Lọc theo nhóm.</p>
+<div class="filter-bar">
+<button class="filter-btn active" data-filter="all">Tất cả</button>
+<button class="filter-btn" data-filter="core">Trọng điểm</button>
+<button class="filter-btn" data-filter="action">Động từ</button>
+<button class="filter-btn" data-filter="couple">Vợ chồng</button>
+</div>
+<div class="vocab-grid" id="vocabGrid">
+<div class="vocab-item" data-cat="core couple" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">细节</div><div class="vocab-pinyin">xìjié</div><div class="vocab-mean">Chi tiết</div><div class="vocab-pos">n.</div><div class="vocab-example">例：真爱体现在生活中的每一个细节上。</div></div>
+<div class="vocab-item" data-cat="core" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">电台</div><div class="vocab-pinyin">diàntái</div><div class="vocab-mean">Đài phát thanh</div><div class="vocab-pos">n.</div><div class="vocab-example">例：电台要选出一对最恩爱的夫妻。</div></div>
+<div class="vocab-item" data-cat="core couple" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">恩爱</div><div class="vocab-pinyin">ēn'ài</div><div class="vocab-mean">Ân ái (vợ chồng)</div><div class="vocab-pos">adj.</div><div class="vocab-example">例：他们一直很恩爱。</div></div>
+<div class="vocab-item" data-cat="core" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">对比</div><div class="vocab-pinyin">duìbǐ</div><div class="vocab-mean">So sánh, đối chiếu</div><div class="vocab-pos">v.</div><div class="vocab-example">例：对比后，有三对夫妻入围。</div></div>
+<div class="vocab-item" data-cat="core" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">入围</div><div class="vocab-pinyin">rùwéi</div><div class="vocab-mean">Lọt vào vòng trong</div><div class="vocab-pos">v.</div><div class="vocab-example">例：三对夫妻入围了。</div></div>
+<div class="vocab-item" data-cat="core" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">评委</div><div class="vocab-pinyin">píngwěi</div><div class="vocab-mean">Ban giám khảo</div><div class="vocab-pos">n.</div><div class="vocab-example">例：评委们听了都很感动。</div></div>
+<div class="vocab-item" data-cat="core" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">如何</div><div class="vocab-pinyin">rúhé</div><div class="vocab-mean">Như thế nào (trang trọng)</div><div class="vocab-pos">pron.</div><div class="vocab-example">例：我们正在研究如何解决这个问题。</div></div>
+<div class="vocab-item" data-cat="core couple" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">瘫痪</div><div class="vocab-pinyin">tānhuàn</div><div class="vocab-mean">Bại liệt</div><div class="vocab-pos">v.</div><div class="vocab-example">例：几年前她全身瘫痪了。</div></div>
+<div class="vocab-item" data-cat="core couple" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">离婚</div><div class="vocab-pinyin">líhūn</div><div class="vocab-mean">Ly hôn</div><div class="vocab-pos">v.</div><div class="vocab-example">例：别人都觉得她丈夫会跟她离婚。</div></div>
+<div class="vocab-item" data-cat="core" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">自杀</div><div class="vocab-pinyin">zìshā</div><div class="vocab-mean">Tự sát</div><div class="vocab-pos">v.</div><div class="vocab-example">例：她也想过要自杀。</div></div>
+<div class="vocab-item" data-cat="core couple" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">抱怨</div><div class="vocab-pinyin">bàoyuàn</div><div class="vocab-mean">Oán trách, phàn nàn</div><div class="vocab-pos">v.</div><div class="vocab-example">例：丈夫从不抱怨。</div></div>
+<div class="vocab-item" data-cat="core couple" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">爱护</div><div class="vocab-pinyin">àihù</div><div class="vocab-mean">Yêu thương, nâng niu</div><div class="vocab-pos">v.</div><div class="vocab-example">例：在丈夫的爱护下，她终于站了起来。</div></div>
+<div class="vocab-item" data-cat="core couple" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">婚姻</div><div class="vocab-pinyin">hūnyīn</div><div class="vocab-mean">Hôn nhân</div><div class="vocab-pos">n.</div><div class="vocab-example">例：十几年的婚姻生活中，他们从未吵过架。</div></div>
+<div class="vocab-item" data-cat="core couple" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">吵架</div><div class="vocab-pinyin">chǎojià</div><div class="vocab-mean">Cãi nhau</div><div class="vocab-pos">v.</div><div class="vocab-example">例：他们从来没吵过架。</div></div>
+<div class="vocab-item" data-cat="core couple" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">相敬如宾</div><div class="vocab-pinyin">xiāngjìng rúbīn</div><div class="vocab-mean">Tương kính như tân</div><div class="vocab-pos">idiom</div><div class="vocab-example">例：他们一直相敬如宾。</div></div>
+<div class="vocab-item" data-cat="core" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">暗暗</div><div class="vocab-pinyin">àn'àn</div><div class="vocab-mean">Thầm, ngấm ngầm</div><div class="vocab-pos">adv.</div><div class="vocab-example">例：评委们听了暗暗点头。</div></div>
+<div class="vocab-item" data-cat="core" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">轮</div><div class="vocab-pinyin">lún</div><div class="vocab-mean">Đến lượt</div><div class="vocab-pos">v.</div><div class="vocab-example">例：轮到第三对夫妻了。</div></div>
+<div class="vocab-item" data-cat="core" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">不耐烦</div><div class="vocab-pinyin">bú nàifán</div><div class="vocab-mean">Sốt ruột, thiếu kiên nhẫn</div><div class="vocab-pos">adj.</div><div class="vocab-example">例：评委们等得有些不耐烦。</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">靠</div><div class="vocab-pinyin">kào</div><div class="vocab-mean">Dựa / nhờ / gần</div><div class="vocab-pos">v.</div><div class="vocab-example">例：男人的头靠在女人的肩膀上。</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">肩膀</div><div class="vocab-pinyin">jiānbǎng</div><div class="vocab-mean">Vai</div><div class="vocab-pos">n.</div><div class="vocab-example">例：他的头靠在妻子的肩膀上。</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">喊</div><div class="vocab-pinyin">hǎn</div><div class="vocab-mean">Kêu, gọi lớn</div><div class="vocab-pos">v.</div><div class="vocab-example">例：评委要上前喊醒那个男的。</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">伸</div><div class="vocab-pinyin">shēn</div><div class="vocab-mean">Duỗi, chìa ra</div><div class="vocab-pos">v.</div><div class="vocab-example">例：女的伸出手指做了个小声的动作。</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">手指</div><div class="vocab-pinyin">shǒuzhǐ</div><div class="vocab-mean">Ngón tay</div><div class="vocab-pos">n.</div><div class="vocab-example">例：她伸出手指做了个动作。</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">歪歪扭扭</div><div class="vocab-pinyin">wāiwāiniǔniǔ</div><div class="vocab-mean">Xiêu vẹo, nguệch ngoạc</div><div class="vocab-pos">adj.</div><div class="vocab-example">例：她用左手歪歪扭扭写下了一行字。</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">递</div><div class="vocab-pinyin">dì</div><div class="vocab-mean">Đưa, chuyển cho</div><div class="vocab-pos">v.</div><div class="vocab-example">例：她把纸条递给了评委。</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">脑袋</div><div class="vocab-pinyin">nǎodai</div><div class="vocab-mean">Cái đầu</div><div class="vocab-pos">n.</div><div class="vocab-example">例：她的右肩一直让丈夫的脑袋靠着。</div></div>
+<div class="vocab-item" data-cat="core" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">女士</div><div class="vocab-pinyin">nǚshì</div><div class="vocab-mean">Quý bà (lịch sự)</div><div class="vocab-pos">n.</div><div class="vocab-example">例：但是女士，我们得听你们的叙述啊！</div></div>
+<div class="vocab-item" data-cat="core" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">叙述</div><div class="vocab-pinyin">xùshù</div><div class="vocab-mean">Thuật lại, kể lại</div><div class="vocab-pos">v.</div><div class="vocab-example">例：请叙述一下那部电影的内容。</div></div>
+<div class="vocab-item" data-cat="core" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">居然</div><div class="vocab-pinyin">jūrán</div><div class="vocab-mean">Lại (bất ngờ)</div><div class="vocab-pos">adv.</div><div class="vocab-example">例：这个女人居然放弃了这次机会！</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">催</div><div class="vocab-pinyin">cuī</div><div class="vocab-mean">Thúc giục</div><div class="vocab-pos">v.</div><div class="vocab-example">例：评委们决定先不催他们。</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">等待</div><div class="vocab-pinyin">děngdài</div><div class="vocab-mean">Chờ đợi</div><div class="vocab-pos">v.</div><div class="vocab-example">例：评委们再等待一段时间。</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">蚊子</div><div class="vocab-pinyin">wénzi</div><div class="vocab-mean">Con muỗi</div><div class="vocab-pos">n.</div><div class="vocab-example">例：我家住一楼，蚊子多。</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">半夜</div><div class="vocab-pinyin">bànyè</div><div class="vocab-mean">Nửa đêm</div><div class="vocab-pos">n.</div><div class="vocab-example">例：昨晚半夜我被蚊子叮醒了。</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">叮</div><div class="vocab-pinyin">dīng</div><div class="vocab-mean">Đốt, chích</div><div class="vocab-pos">v.</div><div class="vocab-example">例：我被蚊子叮醒了。</div></div>
+<div class="vocab-item" data-cat="couple" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">老婆</div><div class="vocab-pinyin">lǎopo</div><div class="vocab-mean">Vợ (thân mật)</div><div class="vocab-pos">n.</div><div class="vocab-example">例：我怕我老婆再被吵醒。</div></div>
+<div class="vocab-item" data-cat="action" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">吵</div><div class="vocab-pinyin">chǎo</div><div class="vocab-mean">Làm ồn / ồn ào</div><div class="vocab-pos">v./adj.</div><div class="vocab-example">例：我怕吵醒老婆。</div></div>
+<div class="vocab-item" data-cat="core" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">项</div><div class="vocab-pinyin">xiàng</div><div class="vocab-mean">Hạng mục (lượng từ)</div><div class="vocab-pos">m.</div><div class="vocab-example">例：电台增加了两项奖项。</div></div>
+<div class="vocab-item" data-cat="core couple" onclick="this.classList.toggle('open')"><div class="vocab-hanzi">患难与共</div><div class="vocab-pinyin">huànnàn yǔgòng</div><div class="vocab-mean">Hoạn nạn có nhau</div><div class="vocab-pos">idiom</div><div class="vocab-example">例：第一对夫妻被评为“患难与共夫妻”。</div></div>
+</div>
+</div>
+<div class="card">
+<h2>✅ Luyện từ vựng — 10 câu (dễ → khó)</h2>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">1.</span> 结婚三十年了，他们一直很______。<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="v1" value="A"> A. 瘫痪</label><label><input type="radio" name="v1" value="B"> B. 恩爱</label><label><input type="radio" name="v1" value="C"> C. 抱怨</label></div><div class="feedback" id="fb-v1"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">2.</span> 丈夫从不______，一直照顾瘫痪的妻子。<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="v2" value="A"> A. 抱怨</label><label><input type="radio" name="v2" value="B"> B. 入围</label><label><input type="radio" name="v2" value="C"> C. 对比</label></div><div class="feedback" id="fb-v2"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">3.</span> 真爱往往体现在生活中的每一个______上。<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="v3" value="A"> A. 电台</label><label><input type="radio" name="v3" value="B"> B. 评委</label><label><input type="radio" name="v3" value="C"> C. 细节</label></div><div class="feedback" id="fb-v3"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">4.</span> 对比后，有三对夫妻______了。<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="v4" value="A"> A. 离婚</label><label><input type="radio" name="v4" value="B"> B. 入围</label><label><input type="radio" name="v4" value="C"> C. 自杀</label></div><div class="feedback" id="fb-v4"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">5.</span> 男人的头______在女人的肩膀上睡着了。<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="v5" value="A"> A. 靠</label><label><input type="radio" name="v5" value="B"> B. 递</label><label><input type="radio" name="v5" value="C"> C. 催</label></div><div class="feedback" id="fb-v5"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">6.</span> 她______手指做了个小声的动作。<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="v6" value="A"> A. 喊</label><label><input type="radio" name="v6" value="B"> B. 叮</label><label><input type="radio" name="v6" value="C"> C. 伸</label></div><div class="feedback" id="fb-v6"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">7.</span> 这个女人为了不影响丈夫睡觉，______放弃了这次机会！<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="v7" value="A"> A. 暗暗</label><label><input type="radio" name="v7" value="B"> B. 居然</label><label><input type="radio" name="v7" value="C"> C. 如何</label></div><div class="feedback" id="fb-v7"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">8.</span> 他们一直相亲相爱、______。<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="v8" value="A"> A. 相敬如宾</label><label><input type="radio" name="v8" value="B"> B. 患难与共</label><label><input type="radio" name="v8" value="C"> C. 歪歪扭扭</label></div><div class="feedback" id="fb-v8"></div></div>
+<div class="quiz-q" data-ans="D"><p><span class="q-num">9.</span> 哪组搭配完全正确？<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="v9" value="A"> A. 靠窗 / 递杂志 / 催时间 / 叮人</label><label><input type="radio" name="v9" value="B"> B. 靠肩膀 / 递纸条 / 催他们 / 叮醒</label><label><input type="radio" name="v9" value="C"> C. 靠父母 / 递机会 / 催蚊子 / 叮奖项</label><label><input type="radio" name="v9" value="D"> D. 靠在肩膀上 / 递给评委 / 不催他们 / 被蚊子叮醒</label></div><div class="feedback" id="fb-v9"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">10.</span> 妻子瘫痪 → 丈夫不抱怨、爱护她 → 被评为______夫妻。<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="v10" value="A"> A. 相敬如宾</label><label><input type="radio" name="v10" value="B"> B. 最恩爱</label><label><input type="radio" name="v10" value="C"> C. 患难与共</label><label><input type="radio" name="v10" value="D"> D. 不耐烦</label></div><div class="feedback" id="fb-v10"></div></div>
+<button class="btn" onclick="checkQuiz('v',10)">Kiểm tra đáp án</button>
+<div class="score-box" id="score-v"></div>
+</div>
+</div>
+
+<!-- TAB GRAMMAR -->
+<div class="tab-content" id="grammar">
+<div class="card"><h2>📖 1. 如何 vs 怎么</h2><div class="grammar-box"><p><strong>如何</strong>：Văn viết / trang trọng · làm tân ngữ (研究如何…)<br><strong>怎么</strong>：Văn nói · hỏi cách / nguyên nhân · “怎么这么…？”</p><p style="margin-top:.5rem">例：我们正在研究<strong>如何</strong>解决这个问题。<br>例：你<strong>怎么</strong>知道的？／今天<strong>怎么</strong>这么冷？</p></div></div>
+<div class="card"><h2>📖 2. 靠 (3 nghĩa)</h2><div class="grammar-box"><p>① <strong>Dựa vào (vật lý)</strong>：靠在墙上／头靠在肩膀上<br>② <strong>Nhờ vào</strong>：靠父母／靠自己的努力<br>③ <strong>Gần / tiếp giáp</strong>：靠窗的座位／靠海的房子</p></div></div>
+<div class="card"><h2>📖 3. 居然</h2><div class="grammar-box"><p>Phó từ <strong>bất ngờ, không ngờ tới</strong> (≈竟然)。Có thể tích cực hoặc tiêu cực。<br>对比：<strong>果然</strong> = đúng như dự đoán。<br>例：她居然放弃了这次机会！</p></div></div>
+<div class="card">
+<h2>✅ Luyện ngữ pháp — 10 câu</h2>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">1.</span> 我们正在研究______解决这个问题。<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="g1" value="A"> A. 怎么</label><label><input type="radio" name="g1" value="B"> B. 如何</label></div><div class="feedback" id="fb-g1"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">2.</span> 你______知道这件事的？<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="g2" value="A"> A. 怎么</label><label><input type="radio" name="g2" value="B"> B. 如何</label></div><div class="feedback" id="fb-g2"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">3.</span> 天气预报说晴天，没想到下午______下起大雨来了。<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="g3" value="A"> A. 居然</label><label><input type="radio" name="g3" value="B"> B. 果然</label></div><div class="feedback" id="fb-g3"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">4.</span> 他说会来，结果他______来了。<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="g4" value="A"> A. 居然</label><label><input type="radio" name="g4" value="B"> B. 果然</label></div><div class="feedback" id="fb-g4"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">5.</span> “他靠自己的努力找到了工作。” → 靠 nghĩa？<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="g5" value="A"> A. Dựa vào tường</label><label><input type="radio" name="g5" value="B"> B. Nhờ vào</label><label><input type="radio" name="g5" value="C"> C. Gần với</label></div><div class="feedback" id="fb-g5"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">6.</span> “请坐靠窗的位置。” → 靠 nghĩa？<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="g6" value="A"> A. Dựa vào</label><label><input type="radio" name="g6" value="B"> B. Nhờ vào</label><label><input type="radio" name="g6" value="C"> C. Gần / tiếp giáp</label></div><div class="feedback" id="fb-g6"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">7.</span> 哪句用“如何” phù hợp hơn？<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="g7" value="A"> A. 请告诉我们如何申请这个项目。</label><label><input type="radio" name="g7" value="B"> B. 你如何了？</label><label><input type="radio" name="g7" value="C"> C. 今天如何热？</label></div><div class="feedback" id="fb-g7"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">8.</span> 选择：没想到他______通过了考试；他说会来，______来了。<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="g8" value="A"> A. 居然 / 果然</label><label><input type="radio" name="g8" value="B"> B. 果然 / 居然</label><label><input type="radio" name="g8" value="C"> C. 如何 / 怎么</label></div><div class="feedback" id="fb-g8"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">9.</span> “在家靠父母，出门靠朋友” → 靠 nghĩa？<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="g9" value="A"> A. Dựa vào tường</label><label><input type="radio" name="g9" value="B"> B. Nhờ vào / dựa vào sự giúp đỡ</label><label><input type="radio" name="g9" value="C"> C. Gần với</label></div><div class="feedback" id="fb-g9"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">10.</span> 综合：哪句全部 đúng？<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="g10" value="A"> A. 我们怎么研究解决？他居然靠窗坐着。</label><label><input type="radio" name="g10" value="B"> B. 我们如何知道的？他果然靠双手过日子。</label><label><input type="radio" name="g10" value="C"> C. 我们正在研究如何解决这个问题。他靠自己的努力成功了。</label></div><div class="feedback" id="fb-g10"></div></div>
+<button class="btn" onclick="checkQuiz('g',10)">Kiểm tra đáp án</button>
+<div class="score-box" id="score-g"></div>
+</div>
+</div>
+
+<!-- TAB READING -->
+<div class="tab-content" id="reading">
+<div class="card">
+<h2>📄 Tóm tắt 3 câu chuyện vợ chồng</h2>
+<div class="reading-text">
+<span class="cn"><strong>第一对：</strong>妻子全身瘫痪，丈夫几年如一日照顾她，从不抱怨。在爱护下她终于站起来。→ 患难与共</span>
+<span class="vi">Cặp 1: Vợ bại liệt, chồng chăm sóc nhiều năm không phàn nàn. → Hoạn nạn có nhau</span>
+<span class="cn"><strong>第二对：</strong>十几年婚姻中从未红过脸、吵过架，一直相敬如宾。→ 相敬如宾</span>
+<span class="vi">Cặp 2: Hơn 10 năm chưa cãi nhau, luôn tôn trọng nhau. → Tương kính như tân</span>
+<span class="cn"><strong>第三对：</strong>丈夫靠在妻子肩膀上睡着了。妻子为了不吵醒他，居然放弃比赛。丈夫半夜赶蚊子。→ 最恩爱</span>
+<span class="vi">Cặp 3: Chồng dựa vai vợ ngủ. Vợ bỏ cuộc thi. Chồng nửa đêm đuổi muỗi. → Tình yêu chân thành nhất</span>
+</div>
+</div>
+<div class="card">
+<h2>❓ Đọc hiểu — 10 câu</h2>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">1.</span> 第一对夫妻中，丈夫是怎么做的？<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="r1" value="A"> A. 跟妻子离婚了</label><label><input type="radio" name="r1" value="B"> B. 从不抱怨，一直照顾她</label><label><input type="radio" name="r1" value="C"> C. 请了保姆</label></div><div class="feedback" id="fb-r1"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">2.</span> 第二对夫妻为什么关系很好？<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="r2" value="A"> A. 因为有很多钱</label><label><input type="radio" name="r2" value="B"> B. 因为经常旅行</label><label><input type="radio" name="r2" value="C"> C. 因为从未吵架，相敬如宾</label></div><div class="feedback" id="fb-r2"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">3.</span> 第三对夫妻中，妻子为什么放弃机会？<span class="level-tag lv-easy">Dễ</span></p><div class="quiz-opts"><label><input type="radio" name="r3" value="A"> A. 为了不影响丈夫睡觉</label><label><input type="radio" name="r3" value="B"> B. 因为她不耐烦</label><label><input type="radio" name="r3" value="C"> C. 因为评委催她</label></div><div class="feedback" id="fb-r3"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">4.</span> 丈夫昨晚为什么没睡好？<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="r4" value="A"> A. 因为吵架</label><label><input type="radio" name="r4" value="B"> B. 因为给老婆赶蚊子</label><label><input type="radio" name="r4" value="C"> C. 因为工作太忙</label></div><div class="feedback" id="fb-r4"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">5.</span> 真正的“最恩爱夫妻”奖给了谁？<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="r5" value="A"> A. 第一对</label><label><input type="radio" name="r5" value="B"> B. 第二对</label><label><input type="radio" name="r5" value="C"> C. 第三对</label></div><div class="feedback" id="fb-r5"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">6.</span> “红过脸”大概是什么意思？<span class="level-tag lv-mid">Trung</span></p><div class="quiz-opts"><label><input type="radio" name="r6" value="A"> A. 吵架、生气</label><label><input type="radio" name="r6" value="B"> B. 化妆</label><label><input type="radio" name="r6" value="C"> C. 害羞</label></div><div class="feedback" id="fb-r6"></div></div>
+<div class="quiz-q" data-ans="B"><p><span class="q-num">7.</span> 文章想表达的核心是？<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="r7" value="A"> A. 生病很可怕</label><label><input type="radio" name="r7" value="B"> B. 真爱在于细节和默默付出</label><label><input type="radio" name="r7" value="C"> C. 比赛很重要</label></div><div class="feedback" id="fb-r7"></div></div>
+<div class="quiz-q" data-ans="A"><p><span class="q-num">8.</span> 为什么说第三对的爱最打动人？<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="r8" value="A"> A. 因为他们用行动保护对方的休息</label><label><input type="radio" name="r8" value="B"> B. 因为他们说了很多甜言蜜语</label><label><input type="radio" name="r8" value="C"> C. 因为他们很有钱</label></div><div class="feedback" id="fb-r8"></div></div>
+<div class="quiz-q" data-ans="C"><p><span class="q-num">9.</span> 如果另起标题，哪个最合适？<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="r9" value="A"> A. 一场大病</label><label><input type="radio" name="r9" value="B"> B. 电台比赛</label><label><input type="radio" name="r9" value="C"> C. 爱的细节</label><label><input type="radio" name="r9" value="D"> D. 不耐烦的评委</label></div><div class="feedback" id="fb-r9"></div></div>
+<div class="quiz-q" data-ans="D"><p><span class="q-num">10.</span> 最合理的推断是？<span class="level-tag lv-hard">Khó</span></p><div class="quiz-opts"><label><input type="radio" name="r10" value="A"> A. 丈夫最终也生病了</label><label><input type="radio" name="r10" value="B"> B. 妻子很快就好了</label><label><input type="radio" name="r10" value="C"> C. 他们请了很多人帮忙</label><label><input type="radio" name="r10" value="D"> D. 真正的爱通过日常行动体现</label></div><div class="feedback" id="fb-r10"></div></div>
+<button class="btn" onclick="checkQuiz('r',10)">Kiểm tra đáp án</button>
+<div class="score-box" id="score-r"></div>
+</div>
+</div>
+
+<!-- TAB ORDER -->
+<div class="tab-content" id="order">
+<div class="card">
+<h2>🔀 Sắp xếp câu — 10 câu</h2>
+<p class="hint">Nhấn từ theo thứ tự. “Xóa” để làm lại.</p>
+<h3>Câu 1 <span class="level-tag lv-easy">Dễ</span></h3><p class="hint">Họ rất ân ái.</p>
+<div class="order-box" id="bank1"><span class="order-word" data-w="他们">他们</span><span class="order-word" data-w="很">很</span><span class="order-word" data-w="恩爱">恩爱</span><span class="order-word" data-w="。">。</span></div>
+<div class="order-box" id="answer1" style="border-style:solid"></div>
+<button class="btn btn-secondary" onclick="clearOrder(1)">Xóa</button><button class="btn" onclick="checkOrder(1,'他们很恩爱。')">Kiểm tra</button><div class="feedback" id="fb-o1"></div>
+<h3 style="margin-top:1.2rem">Câu 2 <span class="level-tag lv-easy">Dễ</span></h3><p class="hint">Anh ấy không bao giờ phàn nàn.</p>
+<div class="order-box" id="bank2"><span class="order-word" data-w="他">他</span><span class="order-word" data-w="从不">从不</span><span class="order-word" data-w="抱怨">抱怨</span><span class="order-word" data-w="。">。</span></div>
+<div class="order-box" id="answer2" style="border-style:solid"></div>
+<button class="btn btn-secondary" onclick="clearOrder(2)">Xóa</button><button class="btn" onclick="checkOrder(2,'他从不抱怨。')">Kiểm tra</button><div class="feedback" id="fb-o2"></div>
+<h3 style="margin-top:1.2rem">Câu 3 <span class="level-tag lv-easy">Dễ</span></h3><p class="hint">Chân cô ấy bị bại liệt rồi.</p>
+<div class="order-box" id="bank3"><span class="order-word" data-w="她的">她的</span><span class="order-word" data-w="腿">腿</span><span class="order-word" data-w="瘫痪">瘫痪</span><span class="order-word" data-w="了">了</span><span class="order-word" data-w="。">。</span></div>
+<div class="order-box" id="answer3" style="border-style:solid"></div>
+<button class="btn btn-secondary" onclick="clearOrder(3)">Xóa</button><button class="btn" onclick="checkOrder(3,'她的腿瘫痪了。')">Kiểm tra</button><div class="feedback" id="fb-o3"></div>
+<h3 style="margin-top:1.2rem">Câu 4 <span class="level-tag lv-mid">Trung</span></h3><p class="hint">Họ kết hôn 30 năm vẫn rất ân ái.</p>
+<div class="order-box" id="bank4"><span class="order-word" data-w="他们">他们</span><span class="order-word" data-w="结婚">结婚</span><span class="order-word" data-w="三十年了">三十年了</span><span class="order-word" data-w="一直">一直</span><span class="order-word" data-w="很">很</span><span class="order-word" data-w="恩爱">恩爱</span><span class="order-word" data-w="。">。</span></div>
+<div class="order-box" id="answer4" style="border-style:solid"></div>
+<button class="btn btn-secondary" onclick="clearOrder(4)">Xóa</button><button class="btn" onclick="checkOrder(4,'他们结婚三十年了一直很恩爱。')">Kiểm tra</button><div class="feedback" id="fb-o4"></div>
+<h3 style="margin-top:1.2rem">Câu 5 <span class="level-tag lv-mid">Trung</span></h3><p class="hint">Đầu anh ấy dựa vào vai vợ.</p>
+<div class="order-box" id="bank5"><span class="order-word" data-w="他的">他的</span><span class="order-word" data-w="头">头</span><span class="order-word" data-w="靠在">靠在</span><span class="order-word" data-w="妻子的">妻子的</span><span class="order-word" data-w="肩膀上">肩膀上</span><span class="order-word" data-w="。">。</span></div>
+<div class="order-box" id="answer5" style="border-style:solid"></div>
+<button class="btn btn-secondary" onclick="clearOrder(5)">Xóa</button><button class="btn" onclick="checkOrder(5,'他的头靠在妻子的肩膀上。')">Kiểm tra</button><div class="feedback" id="fb-o5"></div>
+<h3 style="margin-top:1.2rem">Câu 6 <span class="level-tag lv-mid">Trung</span></h3><p class="hint">Cô ấy chìa ngón tay ra.</p>
+<div class="order-box" id="bank6"><span class="order-word" data-w="她">她</span><span class="order-word" data-w="伸出">伸出</span><span class="order-word" data-w="手指">手指</span><span class="order-word" data-w="。">。</span></div>
+<div class="order-box" id="answer6" style="border-style:solid"></div>
+<button class="btn btn-secondary" onclick="clearOrder(6)">Xóa</button><button class="btn" onclick="checkOrder(6,'她伸出手指。')">Kiểm tra</button><div class="feedback" id="fb-o6"></div>
+<h3 style="margin-top:1.2rem">Câu 7 <span class="level-tag lv-hard">Khó</span></h3><p class="hint">Tình yêu chân thành nằm ở những chi tiết.</p>
+<div class="order-box" id="bank7"><span class="order-word" data-w="真正的">真正的</span><span class="order-word" data-w="爱">爱</span><span class="order-word" data-w="在于">在于</span><span class="order-word" data-w="细节">细节</span><span class="order-word" data-w="。">。</span></div>
+<div class="order-box" id="answer7" style="border-style:solid"></div>
+<button class="btn btn-secondary" onclick="clearOrder(7)">Xóa</button><button class="btn" onclick="checkOrder(7,'真正的爱在于细节。')">Kiểm tra</button><div class="feedback" id="fb-o7"></div>
+<h3 style="margin-top:1.2rem">Câu 8 <span class="level-tag lv-hard">Khó</span></h3><p class="hint">Dù vợ bại liệt, chồng cũng không phàn nàn.</p>
+<div class="order-box" id="bank8"><span class="order-word" data-w="即使">即使</span><span class="order-word" data-w="妻子">妻子</span><span class="order-word" data-w="瘫痪了">瘫痪了</span><span class="order-word" data-w="丈夫">丈夫</span><span class="order-word" data-w="也">也</span><span class="order-word" data-w="从不">从不</span><span class="order-word" data-w="抱怨">抱怨</span><span class="order-word" data-w="。">。</span></div>
+<div class="order-box" id="answer8" style="border-style:solid"></div>
+<button class="btn btn-secondary" onclick="clearOrder(8)">Xóa</button><button class="btn" onclick="checkOrder(8,'即使妻子瘫痪了丈夫也从不抱怨。')">Kiểm tra</button><div class="feedback" id="fb-o8"></div>
+<h3 style="margin-top:1.2rem">Câu 9 <span class="level-tag lv-hard">Khó</span></h3><p class="hint">Người phụ nữ này không ngờ lại bỏ cuộc thi.</p>
+<div class="order-box" id="bank9"><span class="order-word" data-w="这个">这个</span><span class="order-word" data-w="女人">女人</span><span class="order-word" data-w="居然">居然</span><span class="order-word" data-w="放弃了">放弃了</span><span class="order-word" data-w="这次">这次</span><span class="order-word" data-w="机会">机会</span><span class="order-word" data-w="。">。</span></div>
+<div class="order-box" id="answer9" style="border-style:solid"></div>
+<button class="btn btn-secondary" onclick="clearOrder(9)">Xóa</button><button class="btn" onclick="checkOrder(9,'这个女人居然放弃了这次机会。')">Kiểm tra</button><div class="feedback" id="fb-o9"></div>
+<h3 style="margin-top:1.2rem">Câu 10 <span class="level-tag lv-hard">Khó</span></h3><p class="hint">Chúng tôi đang nghiên cứu cách giải quyết vấn đề này.</p>
+<div class="order-box" id="bank10"><span class="order-word" data-w="我们">我们</span><span class="order-word" data-w="正在">正在</span><span class="order-word" data-w="研究">研究</span><span class="order-word" data-w="如何">如何</span><span class="order-word" data-w="解决">解决</span><span class="order-word" data-w="这个">这个</span><span class="order-word" data-w="问题">问题</span><span class="order-word" data-w="。">。</span></div>
+<div class="order-box" id="answer10" style="border-style:solid"></div>
+<button class="btn btn-secondary" onclick="clearOrder(10)">Xóa</button><button class="btn" onclick="checkOrder(10,'我们正在研究如何解决这个问题。')">Kiểm tra</button><div class="feedback" id="fb-o10"></div>
+</div>
+</div>
+
+<!-- TAB WRITE -->
+<div class="tab-content" id="write">
+<div class="card">
+<h2>✍️ Viết đoạn văn · Cảm nghĩ ngắn</h2>
+<div class="section-note">Yêu cầu giáo trình: Viết đoạn ≥100 chữ về “理想的夫妻关系”，尽量用上生词本课。</div>
+<h3>1. Viết đoạn văn (100字左右)</h3>
+<p class="hint">Đề: 以“理想的夫妻关系”为题。尽量用：恩爱、细节、抱怨、爱护、相敬如宾、患难与共、居然…</p>
+<textarea class="write-area" id="w-para" placeholder="在这里写你的段落…（建议80–150字）" style="min-height:140px"></textarea>
+<button class="btn btn-secondary" onclick="showSample('para')">Xem đoạn mẫu</button>
+<div class="feedback" id="fb-para" style="display:none"></div>
+<h3 style="margin-top:1.5rem">2. Phát biểu cảm nghĩ ngắn (3–5 câu)</h3>
+<p class="hint">Đọc xong bài, bạn cảm thấy thế nào? Viết 3–5 câu tiếng Trung.</p>
+<textarea class="write-area" id="w-feel" placeholder="读完这篇文章，我觉得……" style="min-height:100px"></textarea>
+<button class="btn btn-secondary" onclick="showSample('feel')">Xem mẫu cảm nghĩ</button>
+<div class="feedback" id="fb-feel" style="display:none"></div>
+<h3 style="margin-top:1.5rem">3. Luyện viết câu ngắn (5 đề)</h3>
+<div style="margin-bottom:1rem"><p><strong>①</strong> Dùng 居然 + 放弃</p><textarea class="write-area" id="w1" placeholder="她居然……"></textarea><button class="btn btn-secondary" onclick="showSample(1)">Mẫu</button><div class="feedback" id="fb-w1" style="display:none"></div></div>
+<div style="margin-bottom:1rem"><p><strong>②</strong> Dùng 即使……也…… + 抱怨</p><textarea class="write-area" id="w2" placeholder="即使……也……"></textarea><button class="btn btn-secondary" onclick="showSample(2)">Mẫu</button><div class="feedback" id="fb-w2" style="display:none"></div></div>
+<div style="margin-bottom:1rem"><p><strong>③</strong> Dùng 靠 + 肩膀</p><textarea class="write-area" id="w3" placeholder="他的头靠在……"></textarea><button class="btn btn-secondary" onclick="showSample(3)">Mẫu</button><div class="feedback" id="fb-w3" style="display:none"></div></div>
+<div style="margin-bottom:1rem"><p><strong>④</strong> Dùng 如何 + 解决</p><textarea class="write-area" id="w4" placeholder="我们正在研究如何……"></textarea><button class="btn btn-secondary" onclick="showSample(4)">Mẫu</button><div class="feedback" id="fb-w4" style="display:none"></div></div>
+<div style="margin-bottom:1rem"><p><strong>⑤</strong> Dùng 相敬如宾 / 患难与共</p><textarea class="write-area" id="w5" placeholder="他们一直……"></textarea><button class="btn btn-secondary" onclick="showSample(5)">Mẫu</button><div class="feedback" id="fb-w5" style="display:none"></div></div>
+</div>
+</div>
+
+<!-- TAB OPINION -->
+<div class="tab-content" id="opinion">
+<div class="card">
+<h2>💬 Trình bày quan điểm cá nhân</h2>
+<div class="section-note">Giáo trình yêu cầu: Thảo luận “理想的夫妻关系是什么样的”, hoàn thành viết và trình bày quan điểm.</div>
+<h3>Câu hỏi thảo luận</h3>
+<div class="grammar-box">
+<p>1. 你认为什么样的夫妻才是“恩爱”的夫妻？</p>
+<p>2. 你同意评委把“最恩爱”奖给第三对吗？为什么？</p>
+<p>3. 在你看来，爱的细节包括哪些？</p>
+<p>4. 如果是你，面对困难的婚姻，你会如何选择？</p>
+</div>
+<h3 style="margin-top:1.2rem">Viết quan điểm của bạn (80–120字)</h3>
+<p class="hint">Chọn 1–2 câu hỏi, viết rõ quan điểm + lý do. Dùng từ bài học.</p>
+<textarea class="write-area" id="w-opinion" placeholder="我认为真正的恩爱夫妻应该是……因为……" style="min-height:130px"></textarea>
+<button class="btn btn-secondary" onclick="showSample('opinion')">Xem quan điểm mẫu</button>
+<div class="feedback" id="fb-opinion" style="display:none"></div>
+<h3 style="margin-top:1.5rem">Gợi ý cấu trúc trình bày miệng</h3>
+<div class="grammar-box">
+<p><strong>1. Mở đầu:</strong> 关于“理想的夫妻关系”，我想谈谈我的看法。</p>
+<p><strong>2. Quan điểm:</strong> 我认为…… / 在我看来……</p>
+<p><strong>3. Lý do + ví dụ:</strong> 因为……比如说课文里的第三对夫妻……</p>
+<p><strong>4. Kết luận:</strong> 所以，真正的爱在于细节和默默的付出。</p>
+</div>
+<h3 style="margin-top:1.2rem">Checklist tự kiểm</h3>
+<div class="quiz-opts" style="background:#f9f4ee;padding:.8rem;border-radius:10px">
+<label><input type="checkbox"> Đã nêu rõ quan điểm (我认为…)</label>
+<label><input type="checkbox"> Có ít nhất 1 lý do cụ thể</label>
+<label><input type="checkbox"> Dùng ≥3 từ bài học (恩爱、细节、抱怨、爱护、居然…)</label>
+<label><input type="checkbox"> Có ví dụ từ bài đọc hoặc đời sống</label>
+<label><input type="checkbox"> Kết thúc bằng câu tóm tắt</label>
+</div>
+</div>
+</div>
+</div>
+
+<!-- TAB PRACTICE: Viết chữ + Nói có mẫu -->
+<div class="tab-content" id="practice">
+<div class="card">
+<h2>✏️ Luyện viết chữ + Nói có mẫu</h2>
+<div class="skill-box">
+<h4>🎯 Kỹ năng cần rèn luyện trong phần này</h4>
+<ul>
+<li><strong>Viết chữ Hán chính xác</strong> — nhớ bộ thủ, thứ tự nét, hình chữ</li>
+<li><strong>Kết nối âm – chữ</strong> — nghe/pinyin → viết đúng chữ</li>
+<li><strong>Nói theo mẫu</strong> — dùng câu mẫu để nói trôi chảy, tự tin</li>
+<li><strong>Mở rộng nói</strong> — từ nhắc lại → trả lời ngắn → mô tả tình huống</li>
+<li><strong>Ghi nhớ từ vựng lâu dài</strong> — qua phân tích bộ thủ + viết + nói</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<h2>📝 Phần A · Phân tích bộ thủ &amp; Luyện viết chữ</h2>
+<p class="hint">Quan sát bộ thủ → hiểu nghĩa → viết 3 lần mỗi chữ. Nhấn thẻ để xem gợi ý nhớ.</p>
+
+<div class="write-grid">
+<div class="write-card" onclick="this.classList.toggle('open')">
+<div class="hanzi">恩</div>
+<div class="pinyin">ēn</div>
+<div class="radical">部首：心 (tim) + 因</div>
+<div class="vocab-example" style="display:none;font-size:.8rem;margin-top:.4rem;text-align:left">因 (nguyên nhân) + 心 (tim) → ân tình từ trong lòng.<br>搭配：恩爱、感恩、恩情</div>
+<div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="write-card" onclick="this.classList.toggle('open')">
+<div class="hanzi">爱</div>
+<div class="pinyin">ài</div>
+<div class="radical">部首：爪 / 心</div>
+<div class="vocab-example" style="display:none;font-size:.8rem;margin-top:.4rem;text-align:left">形声字。记忆：用手(爪)把心捧出来 → 爱。<br>搭配：爱护、爱情、可爱</div>
+<div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="write-card" onclick="this.classList.toggle('open')">
+<div class="hanzi">护</div>
+<div class="pinyin">hù</div>
+<div class="radical">部首：扌 (tay)</div>
+<div class="vocab-example" style="display:none;font-size:.8rem;margin-top:.4rem;text-align:left">扌 = 手 → dùng tay bảo vệ.<br>搭配：爱护、保护、护士</div>
+<div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="write-card" onclick="this.classList.toggle('open')">
+<div class="hanzi">怨</div>
+<div class="pinyin">yuàn</div>
+<div class="radical">部首：心 (tim)</div>
+<div class="vocab-example" style="display:none;font-size:.8rem;margin-top:.4rem;text-align:left">心上有不平 → oán trách.<br>搭配：抱怨、怨恨、怨气</div>
+<div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="write-card" onclick="this.classList.toggle('open')">
+<div class="hanzi">细</div>
+<div class="pinyin">xì</div>
+<div class="radical">部首：纟 (sợi chỉ)</div>
+<div class="vocab-example" style="display:none;font-size:.8rem;margin-top:.4rem;text-align:left">纟 = sợi tơ → nhỏ, tỉ mỉ.<br>搭配：细节、仔细、详细</div>
+<div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="write-card" onclick="this.classList.toggle('open')">
+<div class="hanzi">节</div>
+<div class="pinyin">jié</div>
+<div class="radical">部首：艹 (cỏ)</div>
+<div class="vocab-example" style="display:none;font-size:.8rem;margin-top:.4rem;text-align:left">本义：đốt tre. Mở rộng：chi tiết, tiết kiệm.<br>搭配：细节、节日、季节</div>
+<div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="write-card" onclick="this.classList.toggle('open')">
+<div class="hanzi">瘫</div>
+<div class="pinyin">tān</div>
+<div class="radical">部首：疒 (bệnh)</div>
+<div class="vocab-example" style="display:none;font-size:.8rem;margin-top:.4rem;text-align:left">疒 = bệnh → tê liệt do bệnh.<br>搭配：瘫痪、瘫痪病人</div>
+<div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="write-card" onclick="this.classList.toggle('open')">
+<div class="hanzi">疾</div>
+<div class="pinyin">jí</div>
+<div class="radical">部首：疒 (bệnh)</div>
+<div class="vocab-example" style="display:none;font-size:.8rem;margin-top:.4rem;text-align:left">疒 + 矢 → bệnh nhanh, cấp.<br>（注：瘫痪的“痪”也是疒部）</div>
+<div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="write-card" onclick="this.classList.toggle('open')">
+<div class="hanzi">靠</div>
+<div class="pinyin">kào</div>
+<div class="radical">部首：非</div>
+<div class="vocab-example" style="display:none;font-size:.8rem;margin-top:.4rem;text-align:left">非 + 告 → dựa vào, nhờ vào.<br>搭配：靠着、靠窗、依靠</div>
+<div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="write-card" onclick="this.classList.toggle('open')">
+<div class="hanzi">肩</div>
+<div class="pinyin">jiān</div>
+<div class="radical">部首：月 (thịt)</div>
+<div class="vocab-example" style="display:none;font-size:.8rem;margin-top:.4rem;text-align:left">月 = 肉 → bộ phận cơ thể.<br>搭配：肩膀、并肩</div>
+<div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="write-card" onclick="this.classList.toggle('open')">
+<div class="hanzi">膀</div>
+<div class="pinyin">bǎng</div>
+<div class="radical">部首：月 (thịt)</div>
+<div class="vocab-example" style="display:none;font-size:.8rem;margin-top:.4rem;text-align:left">月 + 旁 → vai (bên cạnh thân).<br>搭配：肩膀、翅膀</div>
+<div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+<div class="write-card" onclick="this.classList.toggle('open')">
+<div class="hanzi">递</div>
+<div class="pinyin">dì</div>
+<div class="radical">部首：辶 (đi)</div>
+<div class="vocab-example" style="display:none;font-size:.8rem;margin-top:.4rem;text-align:left">辶 = đi chuyển → đưa cho.<br>搭配：递给、传递、快递</div>
+<div class="write-line"></div><div class="write-line"></div><div class="write-line"></div>
+</div>
+</div>
+
+<h3 style="margin-top:1.2rem">A2. Viết theo phiên âm (kết nối âm – chữ)</h3>
+<p class="hint">Nhìn pinyin → viết chữ Hán vào dòng kẻ. Sau đó tự đối chiếu.</p>
+<div style="background:#faf8f5;padding:1rem;border-radius:10px;margin:.6rem 0">
+<p style="margin:.4rem 0"><strong>1.</strong> ēn'ài → <span style="border-bottom:1.5px solid #ccc;display:inline-block;min-width:100px">&nbsp;</span></p>
+<p style="margin:.4rem 0"><strong>2.</strong> bàoyuàn → <span style="border-bottom:1.5px solid #ccc;display:inline-block;min-width:100px">&nbsp;</span></p>
+<p style="margin:.4rem 0"><strong>3.</strong> àihù → <span style="border-bottom:1.5px solid #ccc;display:inline-block;min-width:100px">&nbsp;</span></p>
+<p style="margin:.4rem 0"><strong>4.</strong> xìjié → <span style="border-bottom:1.5px solid #ccc;display:inline-block;min-width:100px">&nbsp;</span></p>
+<p style="margin:.4rem 0"><strong>5.</strong> tānhuàn → <span style="border-bottom:1.5px solid #ccc;display:inline-block;min-width:100px">&nbsp;</span></p>
+<p style="margin:.4rem 0"><strong>6.</strong> jūrán → <span style="border-bottom:1.5px solid #ccc;display:inline-block;min-width:100px">&nbsp;</span></p>
+<p style="margin:.4rem 0"><strong>7.</strong> jiānbǎng → <span style="border-bottom:1.5px solid #ccc;display:inline-block;min-width:100px">&nbsp;</span></p>
+<p style="margin:.4rem 0"><strong>8.</strong> xiāngjìng rúbīn → <span style="border-bottom:1.5px solid #ccc;display:inline-block;min-width:140px">&nbsp;</span></p>
+</div>
+<button class="btn btn-secondary" onclick="document.getElementById('pinyin-ans').style.display='block'">Xem đáp án</button>
+<div id="pinyin-ans" style="display:none;margin-top:.6rem;padding:.7rem;background:#e6f7ed;border-radius:8px;font-size:.9rem">
+1. 恩爱 &nbsp; 2. 抱怨 &nbsp; 3. 爱护 &nbsp; 4. 细节 &nbsp; 5. 瘫痪 &nbsp; 6. 居然 &nbsp; 7. 肩膀 &nbsp; 8. 相敬如宾
+</div>
+</div>
+
+<div class="card">
+<h2>🗣️ Phần B · Nói có mẫu (从模仿到表达)</h2>
+<div class="skill-box">
+<h4>🎯 Kỹ năng nói cần rèn</h4>
+<ul>
+<li>Đọc to rõ ràng, đúng thanh điệu</li>
+<li>Nhắc lại câu mẫu đến thuộc</li>
+<li>Thay từ trong mẫu câu (nâng cao linh hoạt)</li>
+<li>Trả lời câu hỏi ngắn bằng 1–2 câu hoàn chỉnh</li>
+<li>Mô tả tình huống đơn giản (3–5 câu)</li>
+</ul>
+</div>
+
+<h3>B1. Đọc to &amp; Shadowing (3 lần mỗi câu)</h3>
+<div class="speak-box">
+<p class="prompt">Câu mẫu trọng điểm — đọc to, chú ý thanh điệu</p>
+<div class="model">1. 他们结婚三十年了，一直很<strong>恩爱</strong>。</div>
+<div class="model">2. 丈夫从不<strong>抱怨</strong>，一直<strong>爱护</strong>妻子。</div>
+<div class="model">3. 真正的爱在于生活中的<strong>细节</strong>。</div>
+<div class="model">4. 妻子全身<strong>瘫痪</strong>了，丈夫也不离不弃。</div>
+<div class="model">5. 她<strong>居然</strong>放弃了这次机会！</div>
+<div class="model">6. 男人的头<strong>靠</strong>在女人的<strong>肩膀</strong>上。</div>
+<div class="model">7. 他们一直<strong>相敬如宾</strong>，从不吵架。</div>
+<div class="model">8. 第一对夫妻被评为“<strong>患难与共</strong>”夫妻。</div>
+</div>
+
+<h3>B2. Thay từ trong mẫu câu</h3>
+<p class="hint">Giữ cấu trúc, thay phần gạch chân. Nói to câu mới.</p>
+<div class="speak-box">
+<p class="prompt">Mẫu：丈夫从不抱怨，一直爱护妻子。</p>
+<div class="model">→ 妈妈从不抱怨，一直爱护孩子。</div>
+<div class="model">→ 老师从不抱怨，一直爱护学生。</div>
+<div class="model">→ 他从不抱怨，一直爱护自己的身体。</div>
+</div>
+<div class="speak-box">
+<p class="prompt">Mẫu：真正的爱在于细节。</p>
+<div class="model">→ 真正的成功在于努力。</div>
+<div class="model">→ 真正的友谊在于信任。</div>
+<div class="model">→ 真正的幸福在于珍惜。</div>
+</div>
+
+<h3>B3. Trả lời câu hỏi ngắn (dùng mẫu)</h3>
+<p class="hint">Đọc câu hỏi → trả lời 1–2 câu theo mẫu gợi ý. Nói to.</p>
+<div class="speak-box">
+<p class="prompt">1. 第一对夫妻怎么样？</p>
+<div class="model">Mẫu trả lời：妻子瘫痪了，丈夫从不抱怨，一直爱护她。他们是患难与共的夫妻。</div>
+</div>
+<div class="speak-box">
+<p class="prompt">2. 第二对夫妻为什么关系好？</p>
+<div class="model">Mẫu trả lời：他们十几年从来没吵过架，一直相敬如宾。</div>
+</div>
+<div class="speak-box">
+<p class="prompt">3. 第三对夫妻做了什么让你感动？</p>
+<div class="model">Mẫu trả lời：妻子居然放弃了比赛，因为不想吵醒丈夫。丈夫半夜赶蚊子，怕吵到老婆。</div>
+</div>
+<div class="speak-box">
+<p class="prompt">4. 你觉得真正的爱是什么？</p>
+<div class="model">Mẫu trả lời：我认为真正的爱在于细节，在于默默地爱护对方，从不抱怨。</div>
+</div>
+
+<h3>B4. Mô tả ngắn (3–5 câu)</h3>
+<p class="hint">Chọn 1 cặp vợ chồng → nói 3–5 câu liên tục. Có thể nhìn gợi ý từ.</p>
+<div class="speak-box">
+<p class="prompt">Gợi ý từ：瘫痪 / 抱怨 / 爱护 / 细节 / 居然 / 靠 / 肩膀 / 相敬如宾 / 患难与共</p>
+<div class="model" style="background:#fff8e7">
+<strong>Ví dụ mô tả cặp 3：</strong><br>
+第三对夫妻很特别。男人的头靠在女人的肩膀上睡着了。妻子为了不吵醒他，居然放弃了比赛。丈夫半夜被蚊子叮醒，怕吵到老婆，就一直赶蚊子。他们的爱体现在这些细节上。
+</div>
+</div>
+</div>
+
+<div class="card">
+<h2>📋 Phần C · Checklist tự luyện</h2>
+<div class="skill-box">
+<h4>Mỗi lần luyện, tự đánh dấu</h4>
+<ul>
+<li>☐ Đã viết đúng 8–12 chữ trọng điểm (có phân tích bộ thủ)</li>
+<li>☐ Đã viết theo pinyin ít nhất 1 lần, tự sửa lỗi</li>
+<li>☐ Đã đọc to 8 câu mẫu, chú ý thanh điệu</li>
+<li>☐ Đã thay từ và nói lại ít nhất 4 câu mới</li>
+<li>☐ Đã trả lời miệng 3–4 câu hỏi ngắn</li>
+<li>☐ Đã mô tả được 1 cặp vợ chồng (3–5 câu)</li>
+</ul>
+</div>
+<p class="hint" style="margin-top:.8rem">💡 <strong>Gợi ý luyện đều đặn：</strong> Mỗi ngày 15–20 phút — 8 phút viết chữ + 7–10 phút nói theo mẫu. Luyện liên tục 5–7 ngày sẽ thấy rõ sự tiến bộ về độ chính xác và sự tự tin khi nói.</p>
+</div>
+</div>
+
+<footer>HSK 5 · Bài 1 · 爱的细节 · Ôn tập đầy đủ theo HSK标准教程5</footer>
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+btn.addEventListener('click',()=>{
+document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+btn.classList.add('active');
+document.getElementById(btn.dataset.tab).classList.add('active');
+});
+});
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+btn.addEventListener('click',()=>{
+document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+const f=btn.dataset.filter;
+document.querySelectorAll('.vocab-item').forEach(item=>{
+if(f==='all'||item.dataset.cat.includes(f))item.style.display='';
+else item.style.display='none';
+});
+});
+});
+function checkQuiz(prefix,total){
+let score=0;
+for(let i=1;i<=total;i++){
+const name=prefix+i;
+const qEl=document.querySelector(`input[name="${name}"]`)?.closest('.quiz-q');
+if(!qEl)continue;
+const correct=qEl.dataset.ans;
+const selected=document.querySelector(`input[name="${name}"]:checked`);
+const fb=document.getElementById('fb-'+name);
+if(!selected){fb.className='feedback wrong';fb.textContent='⚠️ Chưa chọn đáp án.';continue}
+if(selected.value===correct){fb.className='feedback correct';fb.textContent='✅ Chính xác!';score++}
+else{fb.className='feedback wrong';fb.textContent='❌ Sai. Đáp án đúng: '+correct}
+}
+const box=document.getElementById('score-'+prefix);
+if(box){box.style.display='block';box.textContent='📊 Điểm: '+score+'/'+total+(score===total?' — Xuất sắc!':score>=total*.7?' — Khá tốt!':' — Cần ôn lại!')}
+}
+document.querySelectorAll('.order-word').forEach(w=>{
+w.addEventListener('click',function(){
+if(this.classList.contains('used'))return;
+const bank=this.parentElement;
+const id=bank.id.replace('bank','');
+const ansBox=document.getElementById('answer'+id);
+const clone=this.cloneNode(true);
+clone.classList.remove('used');
+clone.onclick=function(){this.remove();const orig=document.querySelector(`#bank${id} [data-w="${this.dataset.w}"]`);if(orig)orig.classList.remove('used')};
+ansBox.appendChild(clone);
+this.classList.add('used');
+});
+});
+function clearOrder(id){
+document.getElementById('answer'+id).innerHTML='';
+document.querySelectorAll(`#bank${id} .order-word`).forEach(w=>w.classList.remove('used'));
+const fb=document.getElementById('fb-o'+id);
+if(fb){fb.className='feedback';fb.style.display='none'}
+}
+function checkOrder(id,correct){
+const user=Array.from(document.getElementById('answer'+id).querySelectorAll('.order-word')).map(w=>w.dataset.w).join('');
+const fb=document.getElementById('fb-o'+id);
+if(user===correct){fb.className='feedback correct';fb.textContent='✅ Chính xác! '+correct}
+else{fb.className='feedback wrong';fb.textContent='❌ Chưa đúng. Câu đúng: '+correct}
+}
+const samples={
+para:'我认为理想的夫妻关系应该是互相爱护、从不轻易抱怨的。真爱往往体现在生活中的细节上。就像课文里的第三对夫妻，妻子为了不吵醒丈夫，居然放弃了比赛的机会；丈夫半夜为了赶蚊子也不睡觉。他们患难与共、相敬如宾，这才是真正的恩爱。',
+feel:'读完这篇文章，我觉得很感动。真正的爱不在于说多少甜言蜜语，而在于那些默默付出的细节。第三对夫妻的故事让我明白：爱就是在对方需要的时候，悄悄地保护他。',
+opinion:'我同意评委把“最恩爱”奖给第三对夫妻。因为第一对虽然患难与共，第二对虽然相敬如宾，但第三对的爱更体现在日常的细节里。妻子居然放弃机会只为了让丈夫多睡一会儿，丈夫半夜赶蚊子怕吵到老婆——这种默默的爱护最打动人。所以我认为，理想的夫妻关系就是在小事上互相照顾、从不抱怨。',
+1:'这个女人居然放弃了这次机会！',
+2:'即使妻子瘫痪了，丈夫也从不抱怨。',
+3:'他的头靠在妻子的肩膀上睡着了。',
+4:'我们正在研究如何解决这个问题。',
+5:'他们一直相敬如宾。／他们被评为患难与共夫妻。'
+};
+function showSample(key){
+const id=typeof key==='number'?'w'+key:key;
+const fb=document.getElementById('fb-'+id);
+if(!fb)return;
+fb.className='feedback correct';
+fb.style.display='block';
+fb.innerHTML='📝 Mẫu: <strong>'+samples[key]+'</strong>';
+}
+</script>
+</body>
+</html>
